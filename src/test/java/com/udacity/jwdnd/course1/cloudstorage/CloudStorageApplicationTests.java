@@ -75,7 +75,7 @@ class CloudStorageApplicationTests {
 
 		this.driver.get("http://localhost:" + this.port + "/signup");
 		this.signupPage.signup(firstName, lastName, username, password);
-		Assertions.assertTrue(signupPage.isSignedUp());
+		Assertions.assertEquals("Login", driver.getTitle());
 
 		this.driver.get("http://localhost:" + this.port + "/login");
 		this.loginPage.login(username, password);
