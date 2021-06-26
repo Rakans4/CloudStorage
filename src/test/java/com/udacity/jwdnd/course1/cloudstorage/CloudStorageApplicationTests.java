@@ -67,6 +67,7 @@ class CloudStorageApplicationTests {
 	public void testSignUpAndLogin() {
 		this.signupPage = new SignupPage(driver);
 		this.loginPage = new LoginPage(driver);
+		this.homePage = new HomePage(driver);
 		String username = "testUser";
 		String password = "123";
 		String firstName = "Test";
@@ -79,6 +80,10 @@ class CloudStorageApplicationTests {
 		this.driver.get("http://localhost:" + this.port + "/login");
 		this.loginPage.login(username, password);
 		Assertions.assertEquals("Home", driver.getTitle());
+		this.homePage.logout();
+
+		this.driver.get("http://localhost:" + this.port + "/home");
+		Assertions.assertEquals("Login", driver.getTitle());
 	}
 
 
@@ -171,6 +176,13 @@ class CloudStorageApplicationTests {
 		this.resultPage.returnHome();
 		this.homePage.goToCredentials();
 		Assertions.assertNotEquals(password, this.homePage.getCredentials().getPassword());
+		url = "outlook.com";
+		username = "testOutlook";
+		password = "pass456";
+		this.homePage.editCredentials(url, username, password);
+		this.resultPage.returnHome();
+		this.homePage.goToCredentials();
+		Assertions.assertEquals(url, this.homePage.getCredentials().getUrl());
 		this.homePage.deleteCredentials();
 	}
 

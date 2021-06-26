@@ -75,6 +75,9 @@ public class HomePage {
     @FindBy(id = "credentials-table-body")
     private WebElement credentialsTableBody;
 
+    @FindBy(id = "logout")
+    private WebElement logoutButton;
+
     public HomePage (WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
     }
@@ -131,7 +134,7 @@ public class HomePage {
 
     public void editCredentials(String url, String username, String password) {
         credentialsTab.click();
-        addNewCredentialsButton.click();
+        editCredentialsButton.click();
         credentialURLField.clear();
         credentialUsernameField.clear();
         credentialPasswordField.clear();
@@ -158,5 +161,9 @@ public class HomePage {
             credentials.setPassword(credentialsPassword.getText());
         }
         return credentials;
+    }
+
+    public void logout() {
+        logoutButton.click();
     }
 }
